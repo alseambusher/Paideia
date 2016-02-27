@@ -1,0 +1,11 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+assets/imagenet_comp_graph_label_strings.txt 
+assets/LICENSE  
+assets/tensorflow_inception_graph.pb
