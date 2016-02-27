@@ -45,7 +45,7 @@ public class TensorflowClassifier implements Classifier {
   private native String classifyImageRgb(int[] output, int width, int height);
 
   static {
-    System.loadLibrary("tensorflow_demo");
+    System.loadLibrary("paideia");
   }
 
   @Override

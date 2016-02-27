@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/MaterialTheme">
 
-        <activity android:name="org.tensorflow.demo.CameraActivity"
+        <activity android:name="com.alse.paideia.CameraActivity"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
             <intent-filter>

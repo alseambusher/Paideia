@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "tensorflow/examples/Paideia/jni/jni_utils.h"
+#include "Paideia/jni/jni_utils.h"
 
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>

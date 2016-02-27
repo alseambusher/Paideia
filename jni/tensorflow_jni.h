@@ -28,7 +28,7 @@ extern "C" {
 #endif  // __cplusplus
 
 #define TENSORFLOW_METHOD(METHOD_NAME) \
-  Java_org_tensorflow_demo_TensorflowClassifier_##METHOD_NAME  // NOLINT
+  Java_com_alse_paideia_TensorflowClassifier_##METHOD_NAME  // NOLINT
 
 JNIEXPORT jint JNICALL
 TENSORFLOW_METHOD(initializeTensorflow)(

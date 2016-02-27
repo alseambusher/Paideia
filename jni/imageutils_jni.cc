@@ -21,11 +21,11 @@ limitations under the License.
 #include <stdlib.h>
 
 #include "tensorflow/core/platform/types.h"
-#include "tensorflow/examples/Paideia/jni/rgb2yuv.h"
-#include "tensorflow/examples/Paideia/jni/yuv2rgb.h"
+#include "Paideia/jni/rgb2yuv.h"
+#include "Paideia/jni/yuv2rgb.h"
 
 #define IMAGEUTILS_METHOD(METHOD_NAME) \
-  Java_org_tensorflow_demo_env_ImageUtils_##METHOD_NAME  // NOLINT
+  Java_com_alse_paideia_env_ImageUtils_##METHOD_NAME  // NOLINT
 
 using namespace tensorflow;
 

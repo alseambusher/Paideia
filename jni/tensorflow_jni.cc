@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "tensorflow/examples/Paideia/jni/tensorflow_jni.h"
+#include "Paideia/jni/tensorflow_jni.h"
 
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
@@ -33,7 +33,7 @@ limitations under the License.
 #include "tensorflow/core/platform/mutex.h"
 #include "tensorflow/core/platform/types.h"
 #include "tensorflow/core/public/session.h"
-#include "tensorflow/examples/Paideia/jni/jni_utils.h"
+#include "Paideia/jni/jni_utils.h"
 
 // Global variables that holds the Tensorflow classifier.
 static std::unique_ptr<tensorflow::Session> session;

@@ -15,7 +15,7 @@ limitations under the License.
 
 // These utility functions allow for the conversion of RGB data to YUV data.
 
-#include "tensorflow/examples/Paideia/jni/rgb2yuv.h"
+#include "Paideia/jni/rgb2yuv.h"
 
 #include "tensorflow/core/platform/types.h"
 
