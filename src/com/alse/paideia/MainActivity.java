@@ -22,11 +22,16 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class MainActivity extends Activity {
     static TextToSpeech tts;
+    static ImageButton playPause;
+    static boolean isPaused = false; // TODO  get it from prefs
     static int baseColor = Color.parseColor("#266e91");
     static int baseTextColor = Color.parseColor("#ffffff");
 
@@ -56,4 +61,18 @@ public class MainActivity extends Activity {
       window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
       window.setStatusBarColor(baseColor);
   }
+    static void speak(String string){
+        if (!isPaused){
+            tts.speak(string, TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
+        }
+    }
+    static void togglePlayback(){
+        if(playPause != null) {
+            if (isPaused)
+                playPause.setImageResource(R.drawable.ic_pause_circle_filled_white_48dp);
+            else
+                playPause.setImageResource(R.drawable.ic_play_circle_filled_white_48dp);
+            isPaused = !isPaused;
+        }
+    }
 }

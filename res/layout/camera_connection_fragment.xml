@@ -5,11 +5,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.alse.paideia.RecognitionScoreView
-        android:id="@+id/results"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:background="@color/base" />
+        android:layout_height="wrap_content"
+        android:background="@color/base"
+        android:orientation="horizontal">
+
+        <com.alse.paideia.RecognitionScoreView
+            android:id="@+id/results"
+            android:layout_width="0dp"
+            android:layout_height="112dp"
+            android:layout_weight="0.8"
+            android:background="@color/base" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_search_white_48dp" />
+
+            <ImageButton
+                android:id="@+id/say_it"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:src="@drawable/ic_pause_circle_filled_white_48dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,35 +53,28 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".70"
+            android:layout_weight=".30"
+            android:background="@color/base_text"
             android:orientation="vertical">
-            <ListView android:id="@+id/mylistview" android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:choiceMode="multipleChoice">
-            </ListView>
+
+            <com.alse.paideia.AutoFitTextureView
+                android:id="@+id/texture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".30"
+            android:layout_weight=".70"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/say_it"
-                android:layout_width="match_parent"
-                android:textColor="@color/base_text"
-                android:background="@drawable/red_button"
-                android:layout_height="wrap_content"
-                android:text="@string/read" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="100sp">
 
-            </LinearLayout>
-            <com.alse.paideia.AutoFitTextureView
-                android:id="@+id/texture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ListView
+                android:id="@+id/mylistview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:choiceMode="multipleChoice"></ListView>
         </LinearLayout>
     </LinearLayout>
 

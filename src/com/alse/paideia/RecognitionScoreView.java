@@ -16,9 +16,10 @@ import java.util.List;
 import java.util.Random;
 
 public class RecognitionScoreView extends View {
-  private static final float TEXT_SIZE_DIP = 70;
+  private static final float TEXT_SIZE_DIP = 30;
   private static final float TEXT_SIZE_DIP_FACTOR = (float)0.5;
   private List<Recognition> results;
+  private List<Recognition> cached_results;
   private final Paint fgPaint;
 
   public RecognitionScoreView(final Context context, final AttributeSet set) {
@@ -49,8 +50,8 @@ public class RecognitionScoreView extends View {
     float max_confidence = -1;
     float min_confidence = 1;
 
-    if (results != null) {
-      for (final Recognition recog: results){
+    if (results != null && results.size() > 0) {
+      for (final Recognition recog : results) {
         max_confidence = max_confidence > recog.getConfidence() ? max_confidence : recog.getConfidence();
         min_confidence = min_confidence < recog.getConfidence() ? min_confidence : recog.getConfidence();
       }
@@ -58,14 +59,21 @@ public class RecognitionScoreView extends View {
       final int x = 100;
       int y = 0;
 
+      fgPaint.setTextSize(TEXT_SIZE_DIP);
       for (final Recognition recog : results) {
-        fgPaint.setTextSize(recog.getConfidence()*TEXT_SIZE_DIP + TEXT_SIZE_DIP_FACTOR/recog.getConfidence());
+//        fgPaint.setTextSize(recog.getConfidence()*TEXT_SIZE_DIP + TEXT_SIZE_DIP_FACTOR/recog.getConfidence());
         if (y == 0)
           y = (int) (fgPaint.getTextSize() * 1.5f);
         String text = recog.getTitle() + ": " + recog.getConfidence();
-        canvas.drawText(text, x ,  y, fgPaint);
+        canvas.drawText(text, x, y, fgPaint);
         y += fgPaint.getTextSize();
       }
+      if (cached_results != null && cached_results.size() > 0) {
+        if (!cached_results.get(0).getTitle().equals(results.get(0).getTitle())){
+          MainActivity.speak(results.get(0).getTitle());
+        }
+      }
+      cached_results = results;
     }
   }
 }

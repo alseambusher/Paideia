@@ -1,19 +1,3 @@
-/*
- * Copyright 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.alse.paideia;
 
 import android.app.Activity;
@@ -50,6 +34,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -74,7 +59,6 @@ public class CameraConnectionFragment extends Fragment {
   private static final int MINIMUM_PREVIEW_SIZE = 320;
 
   private RecognitionScoreView scoreView;
-  private Button bSpeak;
 
   /**
    * Conversion from screen rotation to JPEG orientation.
@@ -281,13 +265,12 @@ public class CameraConnectionFragment extends Fragment {
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     scoreView = (RecognitionScoreView) view.findViewById(R.id.results);
-    bSpeak = (Button) view.findViewById(R.id.say_it);
+    ImageButton bSpeak = (ImageButton) view.findViewById(R.id.say_it);
+    MainActivity.playPause = bSpeak;
     bSpeak.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Classifier.Recognition result = scoreView.getTopResult();
-        if (result != null)
-          MainActivity.tts.speak(result.getTitle(), TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
+        MainActivity.togglePlayback();
       }
     });
     ListView lv = (ListView)view.findViewById(R.id.mylistview);
