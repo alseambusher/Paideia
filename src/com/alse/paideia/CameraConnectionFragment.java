@@ -50,6 +50,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.alse.paideia.env.Logger;
@@ -73,7 +74,7 @@ public class CameraConnectionFragment extends Fragment {
   private static final int MINIMUM_PREVIEW_SIZE = 320;
 
   private RecognitionScoreView scoreView;
-  private Button bSayIt;
+  private Button bSpeak;
 
   /**
    * Conversion from screen rotation to JPEG orientation.
@@ -280,13 +281,29 @@ public class CameraConnectionFragment extends Fragment {
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     scoreView = (RecognitionScoreView) view.findViewById(R.id.results);
-    bSayIt = (Button) view.findViewById(R.id.say_it);
-    bSayIt.setOnClickListener(new View.OnClickListener() {
+    bSpeak = (Button) view.findViewById(R.id.say_it);
+    bSpeak.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        MainActivity.tts.speak(scoreView.getTopResult().getTitle(), TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
+        Classifier.Recognition result = scoreView.getTopResult();
+        if (result != null)
+          MainActivity.tts.speak(result.getTitle(), TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
       }
     });
+    ListView lv = (ListView)view.findViewById(R.id.mylistview);
+    ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getData(), new GestureListner());
+    lv.setAdapter(adapter);
+  }
+
+  public ArrayList<Model> getData()
+  {
+    ArrayList<Model> models = new ArrayList<Model>();
+    for(int a=0;a<10;a++)
+    {
+      Model m = new Model(String.format("Item %d", a));
+      models.add(m);
+    }
+    return models;
   }
 
   @Override

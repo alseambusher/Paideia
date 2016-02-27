@@ -1,4 +1,6 @@
-# Paideia
+Paideia
+=======
+![](res/drawable-xxxhdpi/ic_launcher.png)
 
 Compiling
 
@@ -7,3 +9,4 @@ $ wget https://storage.googleapis.com/download.tensorflow.org/models/inception5h
 
 $ unzip /tmp/inception5h.zip -d tensorflow/examples/android/assets/
 ```
+

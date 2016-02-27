@@ -17,14 +17,19 @@
 package com.alse.paideia;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.Window;
 import android.view.WindowManager;
 
 import java.util.Locale;
 
 public class MainActivity extends Activity {
     static TextToSpeech tts;
+    static int baseColor = Color.parseColor("#266e91");
+    static int baseTextColor = Color.parseColor("#ffffff");
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,5 +51,9 @@ public class MainActivity extends Activity {
           .replace(R.id.container, CameraConnectionFragment.newInstance())
           .commit();
     }
+      Window window = getWindow();
+      window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+      window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+      window.setStatusBarColor(baseColor);
   }
 }
