@@ -18,15 +18,28 @@ package com.alse.paideia;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.WindowManager;
 
-public class CameraActivity extends Activity {
+import java.util.Locale;
+
+public class MainActivity extends Activity {
+    static TextToSpeech tts;
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     setContentView(R.layout.activity_camera);
+
+    tts=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+      @Override
+      public void onInit(int status) {
+          if(status != TextToSpeech.ERROR) {
+              tts.setLanguage(Locale.US);
+          }
+      }
+    });
     if (null == savedInstanceState) {
       getFragmentManager()
           .beginTransaction()

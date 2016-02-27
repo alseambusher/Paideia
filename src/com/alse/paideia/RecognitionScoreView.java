@@ -18,6 +18,7 @@ package com.alse.paideia;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.speech.tts.TextToSpeech;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.view.View;
 import com.alse.paideia.Classifier.Recognition;
 
 import java.util.List;
+import java.util.Random;
 
 public class RecognitionScoreView extends View {
   private static final float TEXT_SIZE_DIP = 24;
@@ -49,6 +51,10 @@ public class RecognitionScoreView extends View {
   public void setResults(final List<Recognition> results) {
     this.results = results;
     postInvalidate();
+  }
+
+  public Recognition getTopResult(){
+    return this.results.get(0);
   }
 
   @Override

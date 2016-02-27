@@ -11,3 +11,5 @@ assets/LICENSE
 assets/tensorflow_inception_graph.pb
 *~
 *.swp
+.idea
+gen

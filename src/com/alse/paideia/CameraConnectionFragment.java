@@ -41,6 +41,7 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.speech.tts.TextToSpeech;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.alse.paideia.env.Logger;
@@ -57,6 +59,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -70,6 +73,7 @@ public class CameraConnectionFragment extends Fragment {
   private static final int MINIMUM_PREVIEW_SIZE = 320;
 
   private RecognitionScoreView scoreView;
+  private Button bSayIt;
 
   /**
    * Conversion from screen rotation to JPEG orientation.
@@ -276,6 +280,13 @@ public class CameraConnectionFragment extends Fragment {
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     scoreView = (RecognitionScoreView) view.findViewById(R.id.results);
+    bSayIt = (Button) view.findViewById(R.id.say_it);
+    bSayIt.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        MainActivity.tts.speak(scoreView.getTopResult().getTitle(), TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
+      }
+    });
   }
 
   @Override
