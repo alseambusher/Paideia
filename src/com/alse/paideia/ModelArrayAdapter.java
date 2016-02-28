@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,10 +41,9 @@ public class ModelArrayAdapter extends ArrayAdapter<Model>
 
             view.setTag(viewHolder);
 
-            viewHolder.text = (TextView) view.findViewById(R.id.label);
-            viewHolder.checkbox = (CheckBox) view.findViewById(R.id.check);
-            viewHolder.icon = (ImageView) view.findViewById(R.id.icon);
-            viewHolder.checkbox.setTag(m);
+            viewHolder.title= (TextView) view.findViewById(R.id.results_title);
+            viewHolder.body = (TextView) view.findViewById(R.id.results_body);
+            viewHolder.icon = (ImageView) view.findViewById(R.id.preview);
             viewHolder.position = position;
 
             Holder = viewHolder;
@@ -59,7 +57,9 @@ public class ModelArrayAdapter extends ArrayAdapter<Model>
 
         Holder.model = m;
         Holder.position = position;
-        Holder.text.setText(m.getName());
+        Holder.title.setText(m.getTitle());
+        Holder.body.setText(m.getBody());
+        Holder.icon.setImageBitmap(m.getIcon());
         return view;
     }
 }

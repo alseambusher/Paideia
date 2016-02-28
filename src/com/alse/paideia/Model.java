@@ -1,30 +1,47 @@
 package com.alse.paideia;
 
+import android.graphics.Bitmap;
+
 public class Model {
-    private String name;
-    private boolean selected;
+    private String title;
+    private String body;
+    private Bitmap icon;
     private Boolean running;
-    public Model(String name) {
-        this.name = name;
-        selected = false;
+    public Model(String title, String body, Bitmap icon) {
         running = false;
+        this.title = title;
+        this.body = body;
+        this.icon = icon;
     }
-    public String getName() {
-        return name;
+
+    public String getTitle() {
+        return title;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public boolean isSelected() {
-        return selected;
+
+    public String getBody() {
+        return body;
     }
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+
+    public void setBody(String body) {
+        this.body = body;
     }
-    public boolean isRunning() {
+
+    public Bitmap getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Bitmap icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getRunning() {
         return running;
     }
-    public void setRuning(boolean running) {
+    public void setRunning(Boolean running){
         this.running = running;
     }
 }

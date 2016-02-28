@@ -1,41 +1,27 @@
 package com.alse.paideia;
 
-import android.widget.CheckBox;
+import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewHolder {
-        protected TextView text;
-        protected ImageView icon;
-        protected CheckBox checkbox;
-        protected int position;
-        protected Model model;
-        private int color;
-        private int imageid;
+    protected TextView title;
+    protected TextView body;
+    protected ImageView icon;
+    protected int position;
+    protected Model model;
 
-        public ViewHolder()
-        {
-            position = 0;
-            imageid = R.drawable.ic_action_info;
-            color = 0xFFFFFFFF;
-        }
-        public int getColor() {
-            return color;
-        }
-        public int getImageId() {
-            return imageid;
-        }
-        public void setRunning(boolean running) {
-            model.setRuning(running);
-            if(running)
-            {
-                color = 0xFFffffb6;
-                imageid = R.drawable.ic_launcher;
-            }
-            else
-            {
-                imageid = R.drawable.ic_action_info;
-                color = 0xFFFFFFFF;
-            }
-        }
+    private String positiveFeedback = "Thats great! you will see more of these.";
+    private String negativeFeedback = "We will tune the results based on this";
+
+    public ViewHolder() {
+        position = 0;
+    }
+
+    public void setUserFeedback(boolean running, Context context) {
+       if(model.getRunning() != running)
+            Toast.makeText(context, running ? positiveFeedback : negativeFeedback, Toast.LENGTH_SHORT).show();
+        model.setRunning(running);
+    }
 }

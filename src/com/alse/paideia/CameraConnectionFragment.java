@@ -8,6 +8,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -25,8 +27,6 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -34,7 +34,6 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -46,7 +45,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -274,8 +272,8 @@ public class CameraConnectionFragment extends Fragment {
         MainActivity.togglePlayback();
       }
     });
-    ListView lv = (ListView)view.findViewById(R.id.mylistview);
-    ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getData(), new GestureListner());
+    ListView lv = (ListView)view.findViewById(R.id.results_list_view);
+    ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getSampleData(), new GestureListner());
     lv.setAdapter(adapter);
     ImageButton search = (ImageButton) view.findViewById(R.id.search);
     search.setOnClickListener(new View.OnClickListener() {
@@ -286,12 +284,15 @@ public class CameraConnectionFragment extends Fragment {
     });
   }
 
-  public ArrayList<Model> getData()
+  public ArrayList<Model> getSampleData()
   {
     ArrayList<Model> models = new ArrayList<Model>();
+    Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+    String title = "Pai-deia";
+    String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     for(int a=0;a<10;a++)
     {
-      Model m = new Model(String.format("Item %d", a));
+      Model m = new Model(title, description, bm);
       models.add(m);
     }
     return models;

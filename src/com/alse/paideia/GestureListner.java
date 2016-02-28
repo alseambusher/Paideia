@@ -2,13 +2,8 @@ package com.alse.paideia;
 
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-/**
- * Created by alse on 2/27/16.
- */
+
 public class GestureListner implements View.OnTouchListener {
     private int padding = 0;
     private int initialx = 0;
@@ -36,19 +31,11 @@ public class GestureListner implements View.OnTouchListener {
         }
 
         if (viewHolder != null) {
-            if (padding == 0) {
-                v.setBackgroundColor(0xFF000000);
-                if (viewHolder.model.isRunning())
-                    v.setBackgroundColor(0xFF058805);
-            }
             if (padding > 75) {
-                viewHolder.setRunning(true);
-                v.setBackgroundColor(0xFF00FF00);
-                viewHolder.icon.setImageResource(R.drawable.ic_action_info);
+                viewHolder.setUserFeedback(true, v.getContext());
             }
             if (padding < -75) {
-                viewHolder.setRunning(false);
-                v.setBackgroundColor(0xFFFF0000);
+                viewHolder.setUserFeedback(false, v.getContext());
             }
             v.setPadding(padding, 0, 0, 0);
         }

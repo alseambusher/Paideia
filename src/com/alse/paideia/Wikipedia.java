@@ -1,14 +1,10 @@
 package com.alse.paideia;
 
 import android.os.AsyncTask;
-import android.util.JsonReader;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URL;
 
 public class Wikipedia {
     static String infoURL = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
@@ -32,7 +28,7 @@ public class Wikipedia {
                 object = JGet.get(infoURL + params[0]).getJSONObject("query").getJSONObject("pages");
                 return object.getString(object.names().getString(0));
             } catch (JSONException e) {
-                Log.e("alsealsepaideia", "exception", e);
+                Log.e("com.alse.paideia", "exception", e);
             }
             return null;
         }

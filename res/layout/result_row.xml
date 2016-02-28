@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#FFFFFF">
-    <ImageView android:id="@+id/icon" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_secure" android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true">
+    <ImageView android:id="@+id/preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     </ImageView>
-    <TextView android:text="@+id/TextView01"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/label"
-        android:layout_alignBaseline="@+id/check" android:layout_alignBottom="@+id/check"
-        android:layout_toRightOf="@+id/icon" android:textColor="@color/base_text">
-    </TextView>
-    <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:id="@+id/check" android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true">
-    </CheckBox>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView android:id="@+id/results_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text_bold">
+        </TextView>
+        <TextView android:id="@+id/results_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text">
+        </TextView>
+
+    </LinearLayout>
+</LinearLayout>

@@ -17,5 +17,7 @@
 <resources>
     <color name="base">#266e91</color>
     <color name="base_text">#ffffff</color>
+    <color name="secondary_text">#333333</color>
+    <color name="secondary_text_bold">#111111</color>
     <color name="control_background">#cc4285f4</color>
 </resources>

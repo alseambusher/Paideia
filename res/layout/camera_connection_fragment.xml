@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base_text"
     android:orientation="vertical">
 
     <LinearLayout
@@ -64,18 +65,13 @@
                 android:layout_gravity="bottom" />
         </LinearLayout>
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/results_list_view"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight=".70"
-            android:orientation="vertical">
-
-            <ListView
-                android:id="@+id/mylistview"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:choiceMode="multipleChoice"></ListView>
-        </LinearLayout>
+            android:background="@color/base_text"
+            android:choiceMode="multipleChoice" />
     </LinearLayout>
 
 </LinearLayout>
