@@ -80,6 +80,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textAllCaps="true"
+                android:textColor="#000000"
                 android:padding="5dp"/>
             <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
@@ -90,8 +91,10 @@
                 android:layout_height="wrap_content"
                 android:maxLines = "10"
                 android:scrollbars = "vertical"
+                android:textColor="#000000"
                 android:longClickable="true"
-                android:id="@+id/wikipedia_article"/>
+                android:id="@+id/wikipedia_article"
+                android:padding="5dp"/>
         </LinearLayout>
 
     </LinearLayout>
