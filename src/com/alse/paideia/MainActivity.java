@@ -66,6 +66,13 @@ public class MainActivity extends Activity {
             tts.speak(string, TextToSpeech.QUEUE_FLUSH, null, Integer.toString((new Random()).nextInt()));
         }
     }
+
+    static void forceSpeak(String string){
+        Boolean temp = isPaused;
+        isPaused = false;
+        speak(string);
+        isPaused = temp;
+    }
     static void togglePlayback(){
         if(playPause != null) {
             if (isPaused)

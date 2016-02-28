@@ -28,6 +28,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -37,7 +38,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alse.paideia.env.Logger;
@@ -46,9 +49,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class CameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
@@ -264,6 +270,9 @@ public class CameraConnectionFragment extends Fragment {
 
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
+    Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+    String title = "Pai.deia";
+    String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     scoreView = (RecognitionScoreView) view.findViewById(R.id.results);
     ImageButton bSpeak = (ImageButton) view.findViewById(R.id.say_it);
@@ -289,6 +298,22 @@ public class CameraConnectionFragment extends Fragment {
         builder.show();
       }
     });
+
+    TextView wiki_title = (TextView) view.findViewById(R.id.wikipedia_title);
+    final TextView wiki_body= (TextView) view.findViewById(R.id.wikipedia_article);
+    wiki_body.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(View v) {
+        MainActivity.forceSpeak(wiki_body.getText().toString());
+        return true;
+      }
+    });
+    wiki_body.setMovementMethod(new ScrollingMovementMethod());
+//    ImageView wiki_img = (ImageView) view.findViewById(R.id.wikipedia_image);
+
+    wiki_title.setText(title);
+    wiki_body.setText(description);
+//    wiki_img.setImageBitmap(bm);
   }
   public AlertDialog.Builder searchDialog(final String strArray[],
                                                    String strTitle, final Activity activity) {
@@ -302,7 +327,8 @@ public class CameraConnectionFragment extends Fragment {
 
       @Override
       public void onClick(DialogInterface dialog, int which) {
-        new getDataAsync(strArray[which], activity).execute();
+       getDataAsync task = new getDataAsync(strArray[which], activity);
+        task.execute();
       }
     });
     return alertDialogBuilder;
@@ -311,8 +337,10 @@ public class CameraConnectionFragment extends Fragment {
   private class getDataAsync extends AsyncTask<String, Void, String>{
 
     String type;
-    ArrayList<Model> m = new ArrayList<>();
+    ArrayList<Model> m;
     Activity activity;
+    String title, article;
+    Bitmap img;
     getDataAsync(String type, Activity activity){
       this.type = type;
       this.activity = activity;
@@ -321,12 +349,29 @@ public class CameraConnectionFragment extends Fragment {
     @Override
     protected void onPostExecute(String s) {
       ListView lv = (ListView) activity.findViewById(R.id.results_list_view);
+      TextView wiki_title = (TextView) activity.findViewById(R.id.wikipedia_title);
+      TextView wiki_body= (TextView) activity.findViewById(R.id.wikipedia_article);
+//      ImageView wiki_img = (ImageView) activity.findViewById(R.id.wikipedia_image);
+
+      wiki_title.setText(type);
+      wiki_body.setText(article);
+//      wiki_img.setImageBitmap(img);
       ModelArrayAdapter ad = new ModelArrayAdapter(getActivity(), m, new GestureListner());
       lv.setAdapter(ad);
     }
 
     protected String doInBackground(String... params) {
-      m.add(new Model("Wikipedia", Wikipedia.getInfo(type), Wikipedia.getIcon(type)));
+      m = new ArrayList<>();
+      title = "Wikipedia";
+//      img = Wikipedia.getIcon(type);
+      article = Wikipedia.getInfo(type);
+      Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+      HashMap<String, String> wolfram = XMLparser.WolframGet(type);
+      for(String title: wolfram.keySet()){
+          if(!title.isEmpty() && !wolfram.get(title).isEmpty()) {
+            m.add(new Model(title, wolfram.get(title), bm));
+          }
+      }
       return null;
     }
   }

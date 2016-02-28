@@ -48,7 +48,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -64,14 +64,42 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/results_list_view"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight=".70"
+        <LinearLayout
             android:background="@color/base_text"
-            android:choiceMode="multipleChoice" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/wikipedia_title"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:padding="5dp"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/wikipedia_image"/>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines = "10"
+                android:scrollbars = "vertical"
+                android:longClickable="true"
+                android:id="@+id/wikipedia_article"/>
+        </LinearLayout>
+
     </LinearLayout>
+    <ListView
+        android:id="@+id/results_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_text"
+        android:choiceMode="multipleChoice" />
 
 </LinearLayout>
