@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -276,6 +277,13 @@ public class CameraConnectionFragment extends Fragment {
     ListView lv = (ListView)view.findViewById(R.id.mylistview);
     ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getData(), new GestureListner());
     lv.setAdapter(adapter);
+    ImageButton search = (ImageButton) view.findViewById(R.id.search);
+    search.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        new Wikipedia().getInfo("deer");
+      }
+    });
   }
 
   public ArrayList<Model> getData()
