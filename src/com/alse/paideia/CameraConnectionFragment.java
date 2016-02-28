@@ -24,9 +24,11 @@ import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ImageReader;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -272,23 +274,68 @@ public class CameraConnectionFragment extends Fragment {
         MainActivity.togglePlayback();
       }
     });
-    ListView lv = (ListView)view.findViewById(R.id.results_list_view);
-    ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getSampleData(), new GestureListner());
+    final ListView lv = (ListView)view.findViewById(R.id.results_list_view);
+    final ModelArrayAdapter adapter = new ModelArrayAdapter(getActivity(), getSampleData(), new GestureListner());
     lv.setAdapter(adapter);
     ImageButton search = (ImageButton) view.findViewById(R.id.search);
+
     search.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        new Wikipedia().getInfo("deer");
+        scoreView.filterCached();
+        List<String> queries = scoreView.getTopResults();
+
+        AlertDialog.Builder builder = searchDialog(queries.toArray(new String[queries.size()]), "Search", getActivity());
+        builder.show();
       }
     });
+  }
+  public AlertDialog.Builder searchDialog(final String strArray[],
+                                                   String strTitle, final Activity activity) {
+
+    AlertDialog.Builder alertDialogBuilder =
+            new AlertDialog.Builder(activity);
+    alertDialogBuilder.setTitle(strTitle);
+
+    alertDialogBuilder.setItems(strArray,
+    new DialogInterface.OnClickListener() {
+
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        new getDataAsync(strArray[which], activity).execute();
+      }
+    });
+    return alertDialogBuilder;
+  }
+
+  private class getDataAsync extends AsyncTask<String, Void, String>{
+
+    String type;
+    ArrayList<Model> m = new ArrayList<>();
+    Activity activity;
+    getDataAsync(String type, Activity activity){
+      this.type = type;
+      this.activity = activity;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+      ListView lv = (ListView) activity.findViewById(R.id.results_list_view);
+      ModelArrayAdapter ad = new ModelArrayAdapter(getActivity(), m, new GestureListner());
+      lv.setAdapter(ad);
+    }
+
+    protected String doInBackground(String... params) {
+      m.add(new Model("Wikipedia", Wikipedia.getInfo(type), Wikipedia.getIcon(type)));
+      return null;
+    }
   }
 
   public ArrayList<Model> getSampleData()
   {
     ArrayList<Model> models = new ArrayList<Model>();
     Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-    String title = "Pai-deia";
+    String title = "Pai.deia";
     String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     for(int a=0;a<10;a++)
     {

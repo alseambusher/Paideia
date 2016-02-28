@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ModelArrayAdapter extends ArrayAdapter<Model>
 {
-    private ArrayList<Model> allModelItemsArray;
+    public ArrayList<Model> allModelItemsArray;
     private Activity context;
     private LayoutInflater inflator;
     private View.OnTouchListener listener;

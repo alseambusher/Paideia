@@ -17,7 +17,8 @@
         <TextView android:id="@+id/results_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/secondary_text_bold">
+            android:textColor="@color/secondary_text_bold"
+            android:textStyle="bold">
         </TextView>
         <TextView android:id="@+id/results_body"
             android:layout_width="wrap_content"
