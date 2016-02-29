@@ -29,6 +29,34 @@ Seriously, the kind of information we get through Paideia by observing normal th
 3. Specially abled people who want to learn more.
 4. So basically, everyone who wanna learn more.
 
+##Where can I get it?
+Grab the apk from [release page](https://github.com/alseambusher/Paideia/releases).
+
+##Setting up the codebase.
+* Setup [Tensorflow](https://www.tensorflow.org/versions/r0.7/get_started/os_setup.html).
+* Setup [Bazel](http://bazel.io/docs/install.html). 
+* Clone the repo in the root folder of tensorflow.
+```bash
+$ git clone https://github.com/alseambusher/Paideia
+```
+* Get model
+```bash
+$ wget https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip -O /tmp/inception5h.zip
+
+$ unzip /tmp/inception5h.zip -d Paideia/assets/
+```
+* Building code
+```bash
+$ bazel build //Paideia:paideia
+```
+* Installation
+```bash
+$ adb install bazel-bin/Paideia/paideia.apk
+```
+
+##Contribiting
+Pull requests and suggestions are welcome.
+
 <center>
 <img src="res/drawable-xxxhdpi/ic_launcher.png" style="margin 0 auto;"/>
 </center>
