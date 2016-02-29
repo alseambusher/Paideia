@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,6 +25,7 @@ import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +39,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -214,12 +217,12 @@ public class CameraConnectionFragment extends Fragment {
     final Activity activity = getActivity();
     if (activity != null) {
       activity.runOnUiThread(
-          new Runnable() {
-            @Override
-            public void run() {
-              Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-            }
-          });
+              new Runnable() {
+                @Override
+                public void run() {
+                  Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                }
+              });
     }
   }
 
@@ -350,7 +353,7 @@ public class CameraConnectionFragment extends Fragment {
     protected void onPostExecute(String s) {
       ListView lv = (ListView) activity.findViewById(R.id.results_list_view);
       TextView wiki_title = (TextView) activity.findViewById(R.id.wikipedia_title);
-      TextView wiki_body= (TextView) activity.findViewById(R.id.wikipedia_article);
+      TextView wiki_body = (TextView) activity.findViewById(R.id.wikipedia_article);
 //      ImageView wiki_img = (ImageView) activity.findViewById(R.id.wikipedia_image);
 
       wiki_title.setText(type);
@@ -358,6 +361,18 @@ public class CameraConnectionFragment extends Fragment {
 //      wiki_img.setImageBitmap(img);
       ModelArrayAdapter ad = new ModelArrayAdapter(getActivity(), m, new GestureListner());
       lv.setAdapter(ad);
+
+      lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+          Log.d("alseambusher", "clicked");
+          String url = "https://www.wolframalpha.com/input/?i"+type+ "+" + m.get(position).getTitle();
+          url = url.replace(" ", "+");
+          Intent i = new Intent(Intent.ACTION_VIEW);
+          i.setData(Uri.parse(url));
+          activity.startActivity(i);
+        }
+      });
     }
 
     protected String doInBackground(String... params) {

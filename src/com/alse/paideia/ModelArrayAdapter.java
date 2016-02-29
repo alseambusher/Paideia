@@ -1,6 +1,8 @@
 package com.alse.paideia;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,7 @@ public class ModelArrayAdapter extends ArrayAdapter<Model>
         View view = null;
         if(position > allModelItemsArray.size())
             return null;
-        Model m = allModelItemsArray.get(position);
+        final Model m = allModelItemsArray.get(position);
         final ViewHolder viewHolder = new ViewHolder();
         ViewHolder Holder = null;
         if (convertView == null) {
@@ -52,6 +54,8 @@ public class ModelArrayAdapter extends ArrayAdapter<Model>
             Holder = ((ViewHolder) view.getTag());
         }
 
+
+
         if(this.listener != null)
             view.setOnTouchListener(this.listener);
 
@@ -62,4 +66,5 @@ public class ModelArrayAdapter extends ArrayAdapter<Model>
         Holder.icon.setImageBitmap(m.getIcon());
         return view;
     }
+
 }

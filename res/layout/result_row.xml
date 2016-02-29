@@ -4,7 +4,10 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:focusable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusableInTouchMode="false">
     <ImageView android:id="@+id/preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
