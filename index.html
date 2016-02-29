@@ -22,9 +22,9 @@
       <h1>
 <a id="paideia" class="anchor" href="#paideia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Paideia</h1>
 
-<p>Paideia aims at making lives easier for all of us by bringing knowledge that we need in day to day lives one step closer to all of us. This is an android app using which one can point their phone at quite literally anything and get information about it. For instance, when you want to know more about the fruit that is sitting beside you or when you just want to "learn" more about the stuff that is around you, Paideia helps you start off. Here is some of the info given by Paideia about random stuff that is around us:</p>
+<p>Paideia aims at making lives easier for all of us by bringing knowldege that we need in day to day lives one step closer to all of us. This is an android app using which one can point their phone at quite literally anything and get information about it. For instance, when you want to know more about the fruit that is sitting beside you or when you just want to "learn" more about the stuff that is around you, Paideia helps you start off. Here is some of the info given by Paideia about random stuff that is around us:</p>
 
-<p><img src="https://github.com/alseambusher/Paideia/raw/master/screenshots/1.png" width="250">    <img src="https://github.com/alseambusher/Paideia/raw/master/screenshots/2.png" width="250">    <img src="https://github.com/alseambusher/Paideia/raw/master/screenshots/3.png" width="250">    <img src="https://github.com/alseambusher/Paideia/raw/master/screenshots/4.png" width="250">    <img src="https://github.com/alseambusher/Paideia/raw/master/screenshots/5.png" width="250"></p>
+<p><img src="screenshots/1.png" width="250">    <img src="screenshots/2.png" width="250">    <img src="screenshots/3.png" width="250">    <img src="screenshots/4.png" width="250">    <img src="screenshots/5.png" width="250"></p>
 
 <p>Seriously, the kind of information we get through Paideia by observing normal things around us is amazing!</p>
 
@@ -33,7 +33,7 @@
 
 <ol>
 <li>Detects objects around us.</li>
-<li>Has inbuilt Text-to-speech system that can read it out. This can greatly help people with who are specially able.</li>
+<li>Has inbuilt Text-to-speech system that can read it out. This can greatly help people with who are specially abled.</li>
 <li>Extracts useful and relevant information from Wikipedia and Wolfram Alpha.</li>
 <li>Users can set preferences which allows Paideia to customize what they see.</li>
 </ol>
@@ -45,7 +45,7 @@
 <li>We use a <em>deep learning</em> model trained using Tensorflow on Imagenet ILSVRC2012 data to recognize images from live feed. </li>
 <li>We use API's provided by Wolfram Alpha and Wikipedia in order to extract relevant information to the user.</li>
 <li>We use a simple learning approach to customize feeds for users based on their usage pattern.</li>
-<li>Google TTS system to read out information to the user.</li>
+<li>Google tts system to read out information to the user.</li>
 </ol>
 
 <h2>
@@ -54,12 +54,53 @@
 <ol>
 <li>Children who want to learn more.</li>
 <li>Adults who want to learn more.</li>
-<li>Specially able people who want to learn more.</li>
+<li>Specially abled people who want to learn more.</li>
 <li>So basically, everyone who wanna learn more.</li>
 </ol>
 
+<h2>
+<a id="where-can-i-get-it" class="anchor" href="#where-can-i-get-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Where can I get it?</h2>
+
+<p>Grab the apk from <a href="https://github.com/alseambusher/Paideia/releases">release page</a>.</p>
+
+<h2>
+<a id="setting-up-the-codebase" class="anchor" href="#setting-up-the-codebase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up the codebase.</h2>
+
+<ul>
+<li>Setup <a href="https://www.tensorflow.org/versions/r0.7/get_started/os_setup.html">Tensorflow</a>.</li>
+<li>Setup <a href="http://bazel.io/docs/install.html">Bazel</a>. </li>
+<li>Clone the repo in the root folder of tensorflow.</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ git clone https://github.com/alseambusher/Paideia</pre></div>
+
+<ul>
+<li>Get model</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ wget https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip -O /tmp/inception5h.zip
+
+$ unzip /tmp/inception5h.zip -d Paideia/assets/</pre></div>
+
+<ul>
+<li>Building code</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ bazel build //Paideia:paideia</pre></div>
+
+<ul>
+<li>Installation</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ adb install bazel-bin/Paideia/paideia.apk</pre></div>
+
+<h2>
+<a id="contribiting" class="anchor" href="#contribiting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contribiting</h2>
+
+<p>Pull requests and suggestions are welcome.</p>
+
 <p></p>
-<img src="https://github.com/alseambusher/Paideia/raw/master/res/drawable-xxxhdpi/ic_launcher.png">
+<img src="res/drawable-xxxhdpi/ic_launcher.png">
 
 
       <footer class="site-footer">
